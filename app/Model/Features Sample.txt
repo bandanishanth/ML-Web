@@ -1,7 +1,2 @@
 LotArea  YearBuilt  1stFlrSF  2ndFlrSF  FullBath  BedroomAbvGr TotRmsAbvGrd  O/P
 10084       2004      1694         0         2             3    7              307000
-
-
-
-
-set HTTP_PROXY=http://1215316637:august30@proxy1.gitam.edu:3128
