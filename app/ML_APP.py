@@ -3,7 +3,6 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template
 from joblib import load, dump
 import pandas as pd
-import pickle
 
 app = Flask(__name__)
 
@@ -13,7 +12,7 @@ sample_data = load(r'F:\ML App\app\Model\sample_data.pkl')
 
 @app.route('/')
 def hello():
-    return "Hello"
+    return "Hello World"
 
 
 @app.route('/form')
@@ -24,19 +23,19 @@ def form():
 
 @app.route('/sample_data_predict')
 def sample_predict():
-    data = sample_data
     prediction = model.predict(sample_data)
     output = prediction[0]
-    return str(output)
+    return render_template('result.html',price=output)
 
 
 @app.route("/predict", methods=['POST'])
 def predict():
-    data = request.form.to_dict(flat=True)
+    data = request.form.to_dict()
     prediction = model.predict(pd.DataFrame.from_dict([data]))
+    print(prediction)
     output = prediction[0]
-    return jsonify({"SalePrice": output})
-
+    #return jsonify({"SalePrice": output})
+    return render_template('result.html', price=output)
 
 if __name__ == '__main__':
     app.run(debug=True)
